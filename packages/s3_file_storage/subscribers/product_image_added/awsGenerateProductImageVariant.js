@@ -7,7 +7,7 @@ const {
 const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');
 const { getEnv } = require('@evershop/evershop/src/lib/util/getEnv');
 const sharp = require('sharp');
-const { update } = require('@evershop/postgres-query-builder');
+const { update } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { debug } = require('@evershop/evershop/src/lib/log/debuger');
 

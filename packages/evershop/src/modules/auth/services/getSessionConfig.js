@@ -1,6 +1,6 @@
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');
-const sessionStorage = require('connect-pg-simple');
+const sessionStorage = require('@evershop/mariadb-session-manager');
 const session = require('express-session');
 
 module.exports.getSessionConfig = (cookieSecret) => {

@@ -15,7 +15,7 @@ const {
 } = require('@evershop/evershop/src/lib/webpack/isBuildRequired');
 const publicStatic = require('@evershop/evershop/src/lib/middlewares/publicStatic');
 const themePublicStatic = require('@evershop/evershop/src/lib/middlewares/themePublicStatic');
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {
   setContextValue

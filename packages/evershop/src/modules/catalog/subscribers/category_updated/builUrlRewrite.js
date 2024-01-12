@@ -4,7 +4,7 @@ const {
   execute,
   insertOnUpdate,
   select
-} = require('@evershop/postgres-query-builder');
+} = require('@evershop/evershop/src/lib/postgres/query-builder');
 
 module.exports = async function buildUrlReWrite(data) {
   try {

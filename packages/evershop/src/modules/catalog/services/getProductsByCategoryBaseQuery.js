@@ -1,4 +1,4 @@
-const { execute } = require('@evershop/postgres-query-builder');
+const { execute } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { getProductsBaseQuery } = require('./getProductsBaseQuery');
 

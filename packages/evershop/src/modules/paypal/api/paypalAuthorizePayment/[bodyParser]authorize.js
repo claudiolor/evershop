@@ -1,4 +1,4 @@
-const { select, update, insert } = require('@evershop/postgres-query-builder');
+const { select, update, insert } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { default: axios } = require('axios');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {

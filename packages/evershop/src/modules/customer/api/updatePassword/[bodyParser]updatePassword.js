@@ -1,4 +1,4 @@
-const { select, del } = require('@evershop/postgres-query-builder');
+const { select, del } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc');
 const timezone = require('dayjs/plugin/timezone');

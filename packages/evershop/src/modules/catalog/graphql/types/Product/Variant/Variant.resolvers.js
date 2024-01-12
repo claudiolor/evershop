@@ -1,4 +1,4 @@
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const uniqid = require('uniqid');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const { camelCase } = require('@evershop/evershop/src/lib/util/camelCase');

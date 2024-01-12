@@ -11,7 +11,7 @@ const {
   select,
   update,
   insertOnUpdate
-} = require('@evershop/postgres-query-builder');
+} = require('@evershop/evershop/src/lib/postgres/query-builder');
 const {
   getConnection
 } = require('@evershop/evershop/src/lib/postgres/connection');

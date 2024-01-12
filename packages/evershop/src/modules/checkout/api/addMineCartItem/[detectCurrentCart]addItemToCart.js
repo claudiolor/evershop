@@ -1,4 +1,4 @@
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const {
   INVALID_PAYLOAD,
   INTERNAL_SERVER_ERROR,

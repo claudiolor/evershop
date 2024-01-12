@@ -6,7 +6,7 @@ const {
   select,
   startTransaction,
   update
-} = require('@evershop/postgres-query-builder');
+} = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { v4: uuidv4 } = require('uuid');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');

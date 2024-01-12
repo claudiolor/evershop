@@ -6,10 +6,11 @@ const {
   startTransaction,
   commit,
   rollback
-} = require('@evershop/postgres-query-builder');
+} = require('@evershop/evershop/src/lib/postgres/query-builder');
 const {
   getConnection,
-  pool
+  pool,
+  dbType
 } = require('@evershop/evershop/src/lib/postgres/connection');
 const { existsSync, readdirSync } = require('fs');
 const { error } = require('@evershop/evershop/src/lib/log/debuger');
@@ -30,10 +31,14 @@ async function getCurrentInstalledVersion(module) {
 
 async function migrateModule(module) {
   /** Check if the module has migration folder, if not ignore it */
-  if (!existsSync(path.resolve(module.path, 'migration'))) {
+  const migration_dirs = [module.path, 'migration'];
+  if (dbType != 'postgres') {
+    migration_dirs.push(dbType)
+  }
+  if (!existsSync(path.resolve(...migration_dirs))) {
     return;
   }
-  const migrations = readdirSync(path.resolve(module.path, 'migration'), {
+  const migrations = readdirSync(path.resolve(...migration_dirs), {
     withFileTypes: true
   })
     .filter(
@@ -57,11 +62,7 @@ async function migrateModule(module) {
     // eslint-disable-next-line global-require
     /** We expect the migration script to provide a function as a default export */
     try {
-      await require(path.resolve(
-        module.path,
-        'migration',
-        `Version-${version}.js`
-      ))(connection);
+      await require(path.resolve(...migration_dirs, `Version-${version}.js`))(connection);
       // eslint-disable-next-line no-await-in-loop
       await insertOnUpdate('migration', ['module'])
         .given({

@@ -1,7 +1,7 @@
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');
 const sgMail = require('@sendgrid/mail');
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { error } = require('@evershop/evershop/src/lib/log/debuger');
 
 module.exports = async function sendOrderConfirmationEmail(data) {

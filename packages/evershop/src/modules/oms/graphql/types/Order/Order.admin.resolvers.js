@@ -1,4 +1,4 @@
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const { getOrdersBaseQuery } = require('../../../services/getOrdersBaseQuery');
 const { OrderCollection } = require('../../../services/OrderCollection');

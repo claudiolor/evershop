@@ -1,6 +1,6 @@
 const { error } = require('@evershop/evershop/src/lib/log/debuger');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
-const { execute, select } = require('@evershop/postgres-query-builder');
+const { execute, select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 
 module.exports = async function deleteUrlReWrite(data) {
   try {
@@ -18,7 +18,7 @@ module.exports = async function deleteUrlReWrite(data) {
     );
 
     if (!urlRewrite) {
-      return;
+      
     } else {
       // Delete all the url rewrite rule for the sub categories and products
       await execute(

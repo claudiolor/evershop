@@ -1,4 +1,4 @@
-const { select, execute } = require('@evershop/postgres-query-builder');
+const { select, execute } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { buildUrl } = require('@evershop/evershop/src/lib/router/buildUrl');
 const { camelCase } = require('@evershop/evershop/src/lib/util/camelCase');
 const {

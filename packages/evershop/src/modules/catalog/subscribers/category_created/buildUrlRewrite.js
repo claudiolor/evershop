@@ -4,7 +4,7 @@ const {
   execute,
   select,
   insertOnUpdate
-} = require('@evershop/postgres-query-builder');
+} = require('@evershop/evershop/src/lib/postgres/query-builder');
 
 module.exports = async function buildUrlReWrite(data) {
   const categoryId = data.category_id;

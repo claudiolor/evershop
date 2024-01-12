@@ -1,5 +1,5 @@
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { UNAUTHORIZED } = require('@evershop/evershop/src/lib/util/httpStatus');
 const { setContextValue } = require('../../../graphql/services/contextHelper');
 

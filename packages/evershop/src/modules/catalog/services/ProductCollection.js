@@ -1,7 +1,7 @@
 const { camelCase } = require('@evershop/evershop/src/lib/util/camelCase');
 const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');
 const uniqid = require('uniqid');
-const { select, value, node } = require('@evershop/postgres-query-builder');
+const { select, value, node } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 
 class ProductCollection {
@@ -233,33 +233,33 @@ class ProductCollection {
       const visibleGroups = (
         await select('variant_group_id')
           .from('variant_group')
-          .where('visibility', '=', 't')
+          .where('visibility', '=', '1')
           .execute(pool)
       ).map((v) => v.variant_group_id);
 
       if (visibleGroups) {
         // Get all invisible variants from current query
         copy
-          .select('bool_or(product.visibility)', 'sumv')
+          .select('product.visibility', 'sumv')
           .select('max(product.product_id)', 'product_id')
           .andWhere('product.variant_group_id', 'IN', visibleGroups);
         copy.groupBy('product.variant_group_id');
         copy.orderBy('product.variant_group_id', 'ASC');
-        copy.having('bool_or(product.visibility)', '=', 'f');
+        copy.having('product.visibility', '=', '1');
         const invisibleIds = (await copy.execute(pool)).map(
           (v) => v.product_id
         );
         if (invisibleIds.length > 0) {
           const n = node('AND');
           n.addLeaf('AND', 'product.product_id', 'IN', invisibleIds).addNode(
-            node('OR').addLeaf('OR', 'product.visibility', '=', 't')
+            node('OR').addLeaf('OR', 'product.visibility', '=', '1')
           );
           this.baseQuery.getWhere().addNode(n);
         } else {
-          this.baseQuery.andWhere('product.visibility', '=', 't');
+          this.baseQuery.andWhere('product.visibility', '=', '1');
         }
       } else {
-        this.baseQuery.andWhere('product.visibility', '=', 't');
+        this.baseQuery.andWhere('product.visibility', '=', '1');
       }
     }
 

@@ -1,5 +1,5 @@
 const { request } = require('express');
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { pool } = require('../../lib/postgres/connection');
 const { comparePassword } = require('../../lib/util/passwordHelper');
 

@@ -22,7 +22,7 @@ module.exports = async (request, response, delegate, next) => {
 
     /** If a rejected middleware called next(error) without throwing an error */
     if (isErrorHandlerTriggered(response)) {
-      return;
+      
     } else {
       const route = request.currentRoute;
       // eslint-disable-next-line max-len

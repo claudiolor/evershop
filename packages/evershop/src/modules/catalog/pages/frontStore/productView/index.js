@@ -1,4 +1,4 @@
-const { select, node } = require('@evershop/postgres-query-builder');
+const { select, node } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { get } = require('@evershop/evershop/src/lib/util/get');
 const { getConfig } = require('@evershop/evershop/src/lib/util/getConfig');

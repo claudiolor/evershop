@@ -7,7 +7,7 @@ const {
 const {
   getGoogleUserInfo
 } = require('@evershop/google_login/services/getGoogleUserInfo');
-const { select, insert } = require('@evershop/postgres-query-builder');
+const { select, insert } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { debug } = require('@evershop/evershop/src/lib/log/debuger');
 
 /* eslint-disable-next-line no-unused-vars */

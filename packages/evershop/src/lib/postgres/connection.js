@@ -1,7 +1,26 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { Pool } = require('pg');
+const path = require('path');
 const fs = require('fs');
 const { getConfig } = require('../util/getConfig');
+
+const DB_IMPL_PATH = 'impl';
+
+// Retrieve the database implementations and check which one was selected
+const implementations = fs.readdirSync(path.resolve(module.path, DB_IMPL_PATH), {
+  withFileTypes: true
+})
+  .filter(
+    (dirent) =>
+      dirent.isFile() &&
+      dirent.name.endsWith('.js')
+  )
+  .map((dirent) => dirent.name.replace('.js', ''));
+
+
+const dbType = process.env.DB_TYPE || getConfig('system.database.type', 'postgres');
+if(!implementations.includes(dbType)) {
+  throw `Critical Error: ${dbType} is not a valid DB type, supported types: [${implementations}]`;
+}
 
 // Use env for the database connection, maintain the backward compatibility
 const connectionSetting = {
@@ -54,17 +73,24 @@ switch (sslMode) {
   }
 }
 
-const pool = new Pool(connectionSetting);
-// Set the timezone
-pool.on('connect', (client) => {
-  const timeZone = getConfig('shop.timezone', 'UTC');
-  client.query(`SET TIMEZONE TO "${timeZone}";`);
-});
+const dbImpl = require(path.resolve(module.path, DB_IMPL_PATH, `${dbType}.js`))
+
+const pool = dbImpl.createConnectionPool(connectionSetting);
 
 async function getConnection() {
   // eslint-disable-next-line no-return-await
-  return await pool.connect();
+  return dbImpl.getConnection(pool);
 }
 
+function getMigrationTableQuery() {
+  return dbImpl.MIGRATION_TABLE_QUERY;
+}
+
+function getAdminTableQuery() {
+  return dbImpl.ADMIN_TABLE_QUERY;
+}
+
+const {QUERY_BUILDER} = dbImpl
+
 // eslint-disable-next-line no-multi-assign
-module.exports = exports = { pool, getConnection };
+module.exports = exports = { pool, QUERY_BUILDER, getConnection, getMigrationTableQuery, getAdminTableQuery, dbType };

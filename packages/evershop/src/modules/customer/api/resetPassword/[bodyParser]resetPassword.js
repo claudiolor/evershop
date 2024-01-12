@@ -1,4 +1,4 @@
-const { insert, select } = require('@evershop/postgres-query-builder');
+const { insert, select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {
   OK,

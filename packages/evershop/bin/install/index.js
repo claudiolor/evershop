@@ -11,13 +11,14 @@ const {
   commit,
   rollback,
   insertOnUpdate
-} = require('@evershop/postgres-query-builder');
+} = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { prompt } = require('enquirer');
 const { CONSTANTS } = require('@evershop/evershop/src/lib/helpers');
 const { error, success } = require('@evershop/evershop/src/lib/log/debuger');
 const {
   hashPassword
 } = require('@evershop/evershop/src/lib/util/passwordHelper');
+const { getAdminTableQuery } = require('@evershop/evershop/src/lib/postgres/connection');
 
 // The installation command will create a .env file in the root directory of the project.
 // If you are using docker, do not run this command. Instead, you should set the environment variables in the docker-compose.yml file and run `npm run start`
@@ -230,21 +231,7 @@ DB_SSLMODE="${sslMode}"
   try {
     // Create the admin user
     const passwordHash = hashPassword(adminUser.password || '123456');
-    await execute(
-      connection,
-      `CREATE TABLE IF NOT EXISTS "admin_user" (
-        "admin_user_id" INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
-        "uuid" UUID NOT NULL DEFAULT gen_random_uuid (),
-        "status" boolean NOT NULL DEFAULT TRUE,
-        "email" varchar NOT NULL,
-        "password" varchar NOT NULL,
-        "full_name" varchar DEFAULT NULL,
-        "created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-        "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-        CONSTRAINT "ADMIN_USER_EMAIL_UNIQUE" UNIQUE ("email"),
-        CONSTRAINT "ADMIN_USER_UUID_UNIQUE" UNIQUE ("uuid")
-      );`
-    );
+    await execute(connection, getAdminTableQuery());
     await insertOnUpdate('admin_user', ['email'])
       .given({
         status: 1,

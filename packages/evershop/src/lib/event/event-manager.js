@@ -1,4 +1,4 @@
-const { select, del } = require('@evershop/postgres-query-builder');
+const { select, del } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {
   loadBootstrapScript

@@ -1,6 +1,6 @@
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const { getValueSync } = require('@evershop/evershop/src/lib/util/registry');
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 
 exports.calculateDiscount = async function calculateDiscount(
   cart,

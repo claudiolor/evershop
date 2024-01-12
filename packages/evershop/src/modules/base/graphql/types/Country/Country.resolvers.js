@@ -1,7 +1,7 @@
 const { contries } = require('@evershop/evershop/src/lib/locale/countries');
 const { provinces } = require('@evershop/evershop/src/lib/locale/provinces');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 
 module.exports = {
   Query: {

@@ -4,7 +4,7 @@ const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {
   hashPassword
 } = require('@evershop/evershop/src/lib/util/passwordHelper');
-const { insertOnUpdate } = require('@evershop/postgres-query-builder');
+const { insertOnUpdate } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const yargs = require('yargs');
 
 function isValidEmail(email) {

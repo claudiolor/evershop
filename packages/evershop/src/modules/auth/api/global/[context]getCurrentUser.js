@@ -1,12 +1,12 @@
-const sessionStorage = require('connect-pg-simple');
 const util = require('util');
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const session = require('express-session');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {
   getAdminSessionCookieName
 } = require('../../services/getAdminSessionCookieName');
 const { setContextValue } = require('../../../graphql/services/contextHelper');
+const sessionStorage = require('../../../../../../mariadb-session-manager');
 
 /**
  * This is the session based authentication middleware.

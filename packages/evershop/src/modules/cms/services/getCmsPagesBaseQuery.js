@@ -1,4 +1,4 @@
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 
 module.exports.getCmsPagesBaseQuery = () => {
   const query = select().from('cms_page');

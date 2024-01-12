@@ -1,4 +1,4 @@
-const { update, select } = require('@evershop/postgres-query-builder');
+const { update, select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const {
   getConnection
 } = require('@evershop/evershop/src/lib/postgres/connection');

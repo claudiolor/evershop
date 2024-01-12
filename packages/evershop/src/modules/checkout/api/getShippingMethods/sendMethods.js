@@ -7,7 +7,7 @@ const {
   INVALID_PAYLOAD
 } = require('@evershop/evershop/src/lib/util/httpStatus');
 const { default: axios } = require('axios');
-const { select } = require('@evershop/postgres-query-builder');
+const { select } = require('@evershop/evershop/src/lib/postgres/query-builder');
 const { toPrice } = require('../../services/toPrice');
 
 // eslint-disable-next-line no-unused-vars
